@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import range from "lodash/range";
 import { fetchMovies } from "./fetchMovies";
-import MovieCard from "../common/MovieCard";
-import './movies.css'
-import { max } from "lodash";
+import MovieCard from "../../common/MoviesCard";
+import './style.css'
 
 const Movies = () => {
     //retrieve 10 rows in one call and then scroll down to end then another 10 and same uptill 100
@@ -40,10 +39,10 @@ const Movies = () => {
 
     }, [scrollPage])
 
-    useEffect(() => { console.log(movies_arr)
-        console.log(movies_arr.length);
-        console.log(maxCount)}
-    , [movies_arr])
+    // useEffect(() => { console.log(movies_arr)
+    //     console.log(movies_arr.length);
+    //     console.log(maxCount)}
+    // , [movies_arr])
 
     return (
         <InfiniteScroll
@@ -57,7 +56,7 @@ const Movies = () => {
         {movies_arr && movies_arr?.map((movies) => (
             movies?.results.map((movie) => (
             <div className="movies_row">
-                <MovieCard title={movie.title} overview={movie.overview} />
+                <MovieCard key={movie.id} title={movie.title} overview={movie.overview} />
             </div>
             )) 
         ))}

@@ -1,11 +1,10 @@
-import React from "react";
 import movieBanner from '../../src/assets/movies_banner.jpg'
-import '../features/banner.css'
+import './style.css'
 
 const Banner = () => {
 
     return (
-        <div className="banner">
+        <>
         <nav>
             <ul>
                 <li>Home</li>
@@ -15,8 +14,8 @@ const Banner = () => {
                 <li>Subscription</li>
             </ul>
         </nav>
-        <img src={movieBanner} alt={"movie_banner"} className="banner_image"/>
-        </div>
+        <img src={movieBanner} alt={"movie_banner"}/>
+        </>
     )
 }
 
