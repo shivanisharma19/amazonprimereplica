@@ -17,6 +17,7 @@
   flex-wrap: nowrap; 
   gap: 20px;
   padding-bottom: 10px;
+  overflow: hidden;
 }
 
 .movie_list__buttons{
@@ -25,16 +26,10 @@
   flex-direction: row;
 }
 
-.movies_row__left-scroll {
-  display: block;
-  position: sticky;
-  left: 0;
+.movies_row__left-scroll, .movies_row__right-scroll {
   color: white;
-}
-
-.movies_row__right-scroll{
-  display: block;
-  position: right;
-  left: 0;
-  color: white;
+  background:none;
+  border: none;
+  margin: auto 10px;
+  padding: 0;
 }

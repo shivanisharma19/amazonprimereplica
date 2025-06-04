@@ -4,7 +4,6 @@ import range from "lodash/range";
 import { fetchMovies } from "./fetchMovies";
 import MovieCard from "../../common/MoviesCard";
 import './style.css'
-import { isDisabled } from "@testing-library/user-event/dist/utils";
 
 const Movies = () => {
     //retrieve 10 rows in one call and then scroll down to end then another 10 and same uptill 100
@@ -52,22 +51,22 @@ const Movies = () => {
 
     const handleScroll = (scrollDirection, i) => {
         const scrollAmount = 1000;
-        const ele = scrollRef.current[i]
-        if(!ele)
+        const sect = scrollRef.current[i]
+        if(!sect)
             return
-        ele.scrollBy({
+        sect.scrollBy({
             left: scrollDirection === 'left' ? -scrollAmount : scrollAmount,
         })
 
         setCanScrollLeft(canScrollLeft.map((preVal, index) => {
             if(i === index)
-                return ele.scrollLeft > 0
+                return sect.scrollLeft > 0
             return preVal
             }
         ))
         setCanScrollRight(canScrollRight.map((preVal, index) => {
             if(i === index)
-                return ele.scrollLeft + ele.clientWidth  <= ele.scrollWidth
+                return sect.scrollLeft + sect.clientWidth  <= sect.scrollWidth
             return preVal
             }
         ))
@@ -88,14 +87,22 @@ const Movies = () => {
         >
         <section className="movies_list">
         {movies_arr && movies_arr?.map((movies, index) => (
-            <div className="movie_list__buttons" >
-                <button className="movies_row__left-scroll" id="leftScroll" title="left" onClick={() => handleScroll('left', index)} disabled={!canScrollLeft[index]}> Left </button>
+            <div className="movie_list__buttons" key={index}>
+                <button className="movies_row__left-scroll" id="leftScroll" title="left" onClick={() => handleScroll('left', index)} disabled={!canScrollLeft[index]}>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill={canScrollLeft[index] ? "aliceblue" : "black"}>
+                        <path d="M10 20A10 10 0 1 0 0 10a10 10 0 0 0 10 10zm1.289-15.7 1.422 1.4-4.3 4.344 4.289 4.245-1.4 1.422-5.714-5.648z"/>
+                    </svg>
+                </button>
                 <div className="movies_row" ref={(ele) => scrollRef.current[index] = ele}>
                     {movies?.results.map((movie, index) => (
                         <MovieCard key={`${movie.id}_${index}`} title={movie.title} overview={movie.overview} poster={movie.poster_path} />
                     ))}
                 </div>
-                <button className="movies_row__right-scroll" id="rightScroll" title="right" onClick={() => handleScroll('right',index)} disabled={!canScrollRight[index]} > Right </button>
+                <button className="movies_row__right-scroll" id="rightScroll" title="right" onClick={() => handleScroll('right',index)} disabled={!canScrollRight[index]} >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill={canScrollRight[index] ? "aliceblue" : "black"}>
+                    <path d="M10 20A10 10 0 1 0 0 10a10 10 0 0 0 10 10zM8.711 4.3l5.7 5.766L8.7 15.711l-1.4-1.422 4.289-4.242-4.3-4.347z"/>
+                    </svg>
+                </button>
             </div>
         ))}
         </section>
