@@ -1,9 +1,9 @@
 nav {
     position:sticky;
     top:0;
-    background-color: cadetblue;
+    background-color: black;
     z-index: 999;
-    height: 40px;
+    height: 50px;
     padding-left: 20px;
 }
 ul{
@@ -16,17 +16,19 @@ ul{
 li{
     font-size: 14px;
     font-weight: 500;
-    padding: 5px;
-    margin: 5px;
+    color: rgb(161, 160, 160);
+    padding: 8px;
+    margin: 8px;
     margin-right: 20px;
-    background-color: rgb(113, 188, 190);
-    border: 1px solid rgb(55, 103, 103);
+    background-color: rgb(39, 39, 39);
+    border: 1px solid rgb(100, 100, 100);
     border-radius: 5px;
     cursor: pointer;
 }
 
-img {
+.movie__banner {
   height: 300px;
   width: 100%;
   margin-top: 0;
+  margin-bottom: 40px;
 }

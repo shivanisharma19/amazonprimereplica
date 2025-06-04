@@ -54,11 +54,11 @@ const Movies = () => {
         >
         <section className="movies_list">
         {movies_arr && movies_arr?.map((movies) => (
-            movies?.results.map((movie) => (
             <div className="movies_row">
-                <MovieCard key={movie.id} title={movie.title} overview={movie.overview} />
+            {movies?.results.map((movie) => (
+            <MovieCard key={movie.id} title={movie.title} overview={movie.overview} poster={movie.poster_path}/>
+            ))}
             </div>
-            )) 
         ))}
         </section>
         </InfiniteScroll>
