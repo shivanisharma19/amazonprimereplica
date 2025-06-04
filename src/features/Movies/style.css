@@ -18,3 +18,23 @@
   gap: 20px;
   padding-bottom: 10px;
 }
+
+.movie_list__buttons{
+  display: flex;
+  width: inherit;
+  flex-direction: row;
+}
+
+.movies_row__left-scroll {
+  display: block;
+  position: sticky;
+  left: 0;
+  color: white;
+}
+
+.movies_row__right-scroll{
+  display: block;
+  position: right;
+  left: 0;
+  color: white;
+}

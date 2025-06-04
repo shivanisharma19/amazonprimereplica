@@ -1,17 +1,23 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import range from "lodash/range";
 import { fetchMovies } from "./fetchMovies";
 import MovieCard from "../../common/MoviesCard";
 import './style.css'
+import { isDisabled } from "@testing-library/user-event/dist/utils";
 
 const Movies = () => {
     //retrieve 10 rows in one call and then scroll down to end then another 10 and same uptill 100
+    const maxCount = 100; 
     const [movies_arr, setMovies] = useState([]);
     const [count, setCount] = useState(1);
     const [scrollPage , setScrollPage] = useState(1);
     const [isLoading, setIsloading] = useState();
-    const maxCount = 100;
+
+    // for scroller
+    const [canScrollLeft, setCanScrollLeft] = useState([]);
+    const [canScrollRight, setCanScrollRight] = useState([]);
+    const  scrollRef = useRef([]);
 
     useEffect(() => {
         let isMounted = true
@@ -39,6 +45,34 @@ const Movies = () => {
 
     }, [scrollPage])
 
+    useEffect(() => {
+        setCanScrollLeft(new Array(movies_arr.length).fill(false));
+        setCanScrollRight(new Array(movies_arr.length).fill(true));
+    }, [movies_arr])
+
+    const handleScroll = (scrollDirection, i) => {
+        const scrollAmount = 1000;
+        const ele = scrollRef.current[i]
+        if(!ele)
+            return
+        ele.scrollBy({
+            left: scrollDirection === 'left' ? -scrollAmount : scrollAmount,
+        })
+
+        setCanScrollLeft(canScrollLeft.map((preVal, index) => {
+            if(i === index)
+                return ele.scrollLeft > 0
+            return preVal
+            }
+        ))
+        setCanScrollRight(canScrollRight.map((preVal, index) => {
+            if(i === index)
+                return ele.scrollLeft + ele.clientWidth  <= ele.scrollWidth
+            return preVal
+            }
+        ))
+    }
+
     // useEffect(() => { console.log(movies_arr)
     //     console.log(movies_arr.length);
     //     console.log(maxCount)}
@@ -53,11 +87,15 @@ const Movies = () => {
         endMessage={<p>No more data to load.</p>}
         >
         <section className="movies_list">
-        {movies_arr && movies_arr?.map((movies) => (
-            <div className="movies_row">
-            {movies?.results.map((movie) => (
-            <MovieCard key={movie.id} title={movie.title} overview={movie.overview} poster={movie.poster_path}/>
-            ))}
+        {movies_arr && movies_arr?.map((movies, index) => (
+            <div className="movie_list__buttons" >
+                <button className="movies_row__left-scroll" id="leftScroll" title="left" onClick={() => handleScroll('left', index)} disabled={!canScrollLeft[index]}> Left </button>
+                <div className="movies_row" ref={(ele) => scrollRef.current[index] = ele}>
+                    {movies?.results.map((movie, index) => (
+                        <MovieCard key={`${movie.id}_${index}`} title={movie.title} overview={movie.overview} poster={movie.poster_path} />
+                    ))}
+                </div>
+                <button className="movies_row__right-scroll" id="rightScroll" title="right" onClick={() => handleScroll('right',index)} disabled={!canScrollRight[index]} > Right </button>
             </div>
         ))}
         </section>
