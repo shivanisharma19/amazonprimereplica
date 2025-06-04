@@ -1,11 +1,10 @@
-import React from "react";
-import movieBanner from '../../src/assets/movies_banner.jpg'
-import '../features/banner.css'
+import movieBanner from '../../assets/movies_banner.jpg'
+import './style.css'
 
 const Banner = () => {
 
     return (
-        <div className="banner">
+        <>
         <nav>
             <ul>
                 <li>Home</li>
@@ -15,8 +14,8 @@ const Banner = () => {
                 <li>Subscription</li>
             </ul>
         </nav>
-        <img src={movieBanner} alt={"movie_banner"} className="banner_image"/>
-        </div>
+        <img src={"https://png.pngtree.com/background/20210709/original/pngtree-the-background-of-the-movie-poster-picture-image_869718.jpg"} alt={"movie_banner"} className='movie__banner'/>
+        </>
     )
 }
 

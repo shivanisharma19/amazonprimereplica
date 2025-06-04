@@ -1,0 +1,35 @@
+.movies_list{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    row-gap: 50px;
+    margin: 0 20px;
+    overflow-x: hidden;
+}
+
+.carousel_button{
+    
+}
+
+.movies_row{
+  overflow-x: auto;
+  display: flex;
+  flex-wrap: nowrap; 
+  gap: 20px;
+  padding-bottom: 10px;
+  overflow: hidden;
+}
+
+.movie_list__buttons{
+  display: flex;
+  width: inherit;
+  flex-direction: row;
+}
+
+.movies_row__left-scroll, .movies_row__right-scroll {
+  color: white;
+  background:none;
+  border: none;
+  margin: auto 10px;
+  padding: 0;
+}
