@@ -1,4 +1,4 @@
-const auth_key = "f56b83ce10fd73a85cf95f7f52048459";
+const auth_key = "yourAPIkey";
 
 export const fetchMovies = async(pages) => {
     const promises = pages.map((page) => fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${auth_key}&page=${page}`))
