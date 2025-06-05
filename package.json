@@ -22,7 +22,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "lint": "eslint src/*/*.jsx src/*/*.js --fix ",
+    "lint": "eslint src/*.jsx src/*/*/*.jsx --fix ",
     "test": "react-scripts test",
     "test-server": "http-server -p 3000",
     "cy:run": "cypress run",
