@@ -1,20 +1,22 @@
 import movieBanner from '../../assets/movies_banner.jpg'
+import { useNavigate } from 'react-router'
 import './style.css'
 
 const Banner = () => {
+    const navigate = useNavigate()
 
     return (
         <>
         <nav>
             <ul>
                 <li>Home</li>
-                <li>Movies</li>
+                <li onClick={() => navigate('/')}>Movies</li>
                 <li>TV Shows</li>
                 <li>Live TV</li>
                 <li>Subscription</li>
             </ul>
         </nav>
-        <img src={"https://png.pngtree.com/background/20210709/original/pngtree-the-background-of-the-movie-poster-picture-image_869718.jpg"} alt={"movie_banner"} className='movie__banner'/>
+        <img src={movieBanner} alt={"movie_banner"} className='movie__banner'/>
         </>
     )
 }

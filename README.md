@@ -1,70 +1,107 @@
-# Getting Started with Create React App
+# Amazon Prime Replica
+ 
+Amazon Prime Replica application created with create-react-app; using React, Javascript, TMDB Api.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Features
 
-## Available Scripts
+Amazon Prime Replica
+- Navigation Bar
+    Sticky navigation bar
+    Buttons are inactive
+- Banner
+    Movies banner
+- Movie List
+    100 rows with 20 movie movie card in each row
+    Infinite scroll with 10 rows loaded at once
+    Button scroller to view all the movie cards ( visible only 5 at once) 
+- Movies card
+    Movie poster with movie title and alt message as o=movie description
+
+## Installation
+Git clone
+
+```bash
+    git clone https://github.com/shivanisharma19/amazonprimereplica.git
+    cd amazonprimereplic
+```
+
+## How to build the application
 
 In the project directory, you can run:
 
-### `npm start`
+* `npm install`
+* `npm run build`
 
-Runs the app in the development mode.\
+## How to run the application
+
+In the project directory, you can run:
+
+* `npm install`
+* `npm start`
+
+To Access the movie api, you will need to register yourself on [TMDB](https://developer.themoviedb.org/) and get an authentication key.
+Paste your authentication key in front of `auth_key` in [fetchMovies.js](\src\features\Movies\fetchMovies.js)
+
+Runs the app in the development mode.
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
+## Tesing
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+    Basic tests are written both in cypress and @testing-library/react
 
-### `npm run build`
+## How to run test
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Cypress
+ 
+ To run cypress in cypress browser window
+* `npm install` _[Optional]_
+* `npm run cy:debug`
+* run the spec
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+ To run cypress in command line
+* `npm install` _[Optional]_
+* `npm run cy:e2e`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### React Testing Library
+ 
+* `npm install` _[Optional]_
+* `npm run test`
 
-### `npm run eject`
+## Technologies Stack
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+1) Javascript
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+2) React
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+This project uses [React](https://reactjs.org/)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+3) React Router
 
-## Learn More
+4) TMDB
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+This project fetch data from the movie database [TMDB](https://developer.themoviedb.org/reference/account-details)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+5) Cypress
 
-### Code Splitting
+Tests are made using [Cypress](https://www.cypress.io/).
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Performance Pptimization
 
-### Analyzing the Bundle Size
+In order to achieve good performance
+- Bundling of application ( create-react-app command uses webpack underhood) - to pack application in optimize bundle(s)
+- Implemented infinite scroll and load only 10 rows of data at once, not all at once, so user do not have to wait to load complete data in order to use the application
+- Used Fragment <>
+- Added lazy loading of movie posters to optimize CLS(cumulative layout shift)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Improvements
+- Code Additions
+    - Use Redux/Zustand for state management
+    - Use PostCSS/Saas to implement nested css, variables and mixin
+- Feature Additions
+    - Add navigation in nav items
+    - Add Search
+    - Add Filter
+- Improvements
+    - Improve CSS
+    - Write more test cases
