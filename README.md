@@ -22,7 +22,7 @@ Git clone
 
 ```bash
     git clone https://github.com/shivanisharma19/amazonprimereplica.git
-    cd amazonprimereplic
+    cd amazonprimereplica
 ```
 
 ## How to build the application
@@ -44,6 +44,8 @@ Paste your authentication key in front of `auth_key` in [fetchMovies.js](\src\fe
 
 Runs the app in the development mode.
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+
+[http://localhost:3000](http://localhost:3000) will redirect to [http://localhost:3000/movies](http://localhost:3000/movies)
 
 
 ## Tesing
@@ -72,23 +74,17 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 1) Javascript
 
-2) React
-
-This project uses [React](https://reactjs.org/)
+2) React : [React](https://reactjs.org/)
 
 3) React Router
 
-4) TMDB
+4) TMDB : This project fetch data from the movie database [TMDB](https://developer.themoviedb.org/reference/account-details)
 
-This project fetch data from the movie database [TMDB](https://developer.themoviedb.org/reference/account-details)
+5) Cypress : Tests are made using [Cypress](https://www.cypress.io/).
 
-5) Cypress
+## Performance Optimization
 
-Tests are made using [Cypress](https://www.cypress.io/).
-
-## Performance Pptimization
-
-In order to achieve good performance
+In order to achieve acceptable performance
 - Bundling of application ( create-react-app command uses webpack underhood) - to pack application in optimize bundle(s)
 - Implemented infinite scroll and load only 10 rows of data at once, not all at once, so user do not have to wait to load complete data in order to use the application
 - Used Fragment <>
