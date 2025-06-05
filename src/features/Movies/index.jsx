@@ -84,6 +84,7 @@ const Movies = () => {
         hasMore={maxCount > movies_arr.length}
         loader={<p>Loading...</p>}
         endMessage={<p>No more data to load.</p>}
+        scrollThreshold="80%"
         >
         <section className="movies_list">
         {movies_arr && movies_arr?.map((movies, index) => (
