@@ -6,7 +6,7 @@ import MovieCard from "../../common/MoviesCard";
 import './style.css'
 
 const Movies = () => {
-    //retrieve 10 rows in one call and then scroll down to end then another 10 and same uptill 100
+    //retrieve 10 rows in one call and then scroll down to end then another 10 and same uptill 100 rows
     const maxCount = 100; 
     const [movies_arr, setMovies] = useState([]);
     const [count, setCount] = useState(1);
@@ -18,16 +18,18 @@ const Movies = () => {
     const [canScrollRight, setCanScrollRight] = useState([]);
     const  scrollRef = useRef([]);
 
+    // fetch movies at the mount of the component 
     useEffect(() => {
         let isMounted = true
-        setIsloading(true) //set the loading true
+        setIsloading(true)
+
         const getNextMovies = async() => {
-        const countArr = range(count, count+10)
+        const countArr = range(count, count+10) // range create array from (1:10)
         try{
             const  data_arr = await(fetchMovies(countArr)) //received array of movies array [ 10 : 20 movies]
             if(isMounted) {
-                setMovies((preMovies) => [...preMovies, ...data_arr]) // add on the data
-                setCount(count+10)
+                setMovies((preMovies) => [...preMovies, ...data_arr]) // add on the data with prev one
+                setCount(count+10) // for next iteration
             }
         }
         catch{
@@ -44,20 +46,25 @@ const Movies = () => {
 
     }, [scrollPage])
 
+    // once movies are fetch set the scroll button state for all rows
     useEffect(() => {
         setCanScrollLeft(new Array(movies_arr.length).fill(false));
         setCanScrollRight(new Array(movies_arr.length).fill(true));
     }, [movies_arr])
 
+
+    //Scroll button handler
     const handleScroll = (scrollDirection, i) => {
         const scrollAmount = 1000;
-        const sect = scrollRef.current[i]
+        const sect = scrollRef.current[i] 
+
         if(!sect)
             return
         sect.scrollBy({
             left: scrollDirection === 'left' ? -scrollAmount : scrollAmount,
         })
 
+        // check and update if scroll length is there on either side
         setCanScrollLeft(canScrollLeft.map((preVal, index) => {
             if(i === index)
                 return sect.scrollLeft > 0
@@ -66,7 +73,7 @@ const Movies = () => {
         ))
         setCanScrollRight(canScrollRight.map((preVal, index) => {
             if(i === index)
-                return sect.scrollLeft + sect.clientWidth  <= sect.scrollWidth
+                return sect.scrollLeft + sect.clientWidth  <= sect.scrollWidth //[left scoll value + visible area value <= total scroll width values]
             return preVal
             }
         ))
